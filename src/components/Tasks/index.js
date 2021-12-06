@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { get_tasks } from "../../reducers/tasks";
 import { delete_tasks } from "../../reducers/tasks";
+import { update_tasks } from "../../reducers/tasks";
 
 const Tasks = () => {
   const state = useSelector((state) => {
@@ -110,6 +111,11 @@ const Tasks = () => {
         headers: { Authorization: `Bearer ${state.signIn.token}` },
       }
     );
+    const data = {
+      newTask: edit
+    };
+    dispatch(update_tasks({ data }));
+
     setShowHide(!showHide);
     setBtn1(true);
     setEdit();

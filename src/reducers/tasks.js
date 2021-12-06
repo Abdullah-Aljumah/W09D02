@@ -10,9 +10,13 @@ const task = (state = insitialState, action) => {
       const { tasks } = payload;
       return { tasks };
 
-      case "DELETE":
-        const { del } = payload;
-        return state
+    case "DELETE":
+      const { del } = payload;
+      return state;
+
+    case "UPDATE":
+      const { newTask } = payload;
+      return state;
 
     default:
       return state;
@@ -22,7 +26,7 @@ const task = (state = insitialState, action) => {
 export default task;
 
 export const get_tasks = (data) => {
-  console.log("data",data.data);
+  console.log("data", data.data);
   return {
     type: "GET",
     payload: data.data,
@@ -37,4 +41,10 @@ export const delete_tasks = (data) => {
   };
 };
 
-
+export const update_tasks = (data) => {
+  // console.log("data",data.data);
+  return {
+    type: "UPDATE",
+    payload: "",
+  };
+};
