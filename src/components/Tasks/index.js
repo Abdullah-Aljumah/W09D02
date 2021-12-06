@@ -2,11 +2,19 @@ import axios from "axios";
 import React from "react";
 import { useState, useEffect } from "react";
 import "./style.css";
-
+import { useSelector } from "react-redux";
 const Tasks = () => {
-  const [id, setId] = useState("");
+
+  const state = useSelector((state) => {
+    return {
+      signIn: state.signIn,
+    };
+  });
+
+  console.log("task state", state.signIn.user._id);
+  const [id, setId] = useState(state.signIn.user._id);
   const [tasks, setTasks] = useState([]);
-  const [token, setToken] = useState("");
+  const [token, setToken] = useState(state.signIn.token);
   const [edit, setEdit] = useState("");
 
   const [btn1, setBtn1] = useState(true);
@@ -17,8 +25,8 @@ const Tasks = () => {
   const [adminState, setAdminState] = useState(false);
 
   const getId = () => {
-    const id = localStorage.getItem("id");
-    const token = localStorage.getItem("token");
+    // const id = localStorage.getItem("id");
+    // const token = localStorage.getItem("token");
     setId(id);
     setToken(token);
   };

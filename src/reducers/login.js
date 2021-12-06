@@ -5,7 +5,6 @@ const insitialState = {
 
 const signIn = (state = insitialState, action) => {
   const { type, payload } = action;
-
   switch (type) {
     case "LOGIN":
       const { user, token } = payload;
@@ -23,9 +22,11 @@ const signIn = (state = insitialState, action) => {
 export default signIn;
 
 export const login = (data) => {
+  console.log("login page", data.data);
+
   return {
     type: "LOGIN",
-    payload: data,
+    payload: data.data,
   };
 };
 

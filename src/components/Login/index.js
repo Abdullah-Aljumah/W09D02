@@ -8,25 +8,29 @@ import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../reducers/login.js";
 // import signIn from "../reducers/login";
 const Login = () => {
+
   const state = useSelector((state) => {
     return {
       signIn: state.signIn,
     };
   });
-  console.log(state);
-  const dispatch = useDispatch();
-  // eslint-disable-next-line
-  const [users, setUsers] = useState([]);
+console.log("state",state.signIn);
 
-  useEffect(() => {
-    let local = localStorage.getItem("token");
-    setTokenLocal(local);
-  }, []);
+  const dispatch = useDispatch();
+  
+  // eslint-disable-next-line
+  // const [users, setUsers] = useState([]);
+
+  // useEffect(() => {
+  //   let local = localStorage.getItem("token");
+  //   setTokenLocal(local);
+  // }, []);
 
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [tokenLocal, setTokenLocal] = useState("");
+  // const [tokenLocal, setTokenLocal] = useState("");
+  
   const reg = () => {
     navigate("/register");
   };
@@ -39,12 +43,13 @@ const Login = () => {
       password: password,
     });
     // console.log(res.data.result);
-
+    console.log("res.data.token",res.data.token);
     const data = {
       user: res.data.result,
       token: res.data.token,
     };
-    console.log("data", data);
+    // console.log("data", data);
+
     dispatch(login({ data }));
 
     // if (res) {
@@ -59,7 +64,7 @@ const Login = () => {
 
   return (
     <div className="login">
-      {tokenLocal ? (
+      {state.signIn.token ? (
         <Tasks />
       ) : (
         <>
