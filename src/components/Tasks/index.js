@@ -7,6 +7,7 @@ import { useDispatch } from "react-redux";
 import { get_tasks } from "../../reducers/tasks";
 import { delete_tasks } from "../../reducers/tasks";
 import { update_tasks } from "../../reducers/tasks";
+import { new_tasks } from "../../reducers/tasks";
 
 const Tasks = () => {
   const state = useSelector((state) => {
@@ -91,12 +92,19 @@ const Tasks = () => {
     console.log(e.target[0].value);
     // eslint-disable-next-line
     let res = await axios.post(
-      `${process.env.REACT_APP_BASE_URL}/newTask/${id}`,
+      `${process.env.REACT_APP_BASE_URL}/newTask/${state.signIn.user._id}`,
       { task: e.target[0].value },
       {
         headers: { Authorization: `Bearer ${state.signIn.token}` },
       }
     );
+
+    const data = {
+      newTask: e.target[0].value,
+    };
+
+    dispatch(new_tasks({ data }));
+
     e.target[0].value = "";
     getTasks();
   };
@@ -112,7 +120,7 @@ const Tasks = () => {
       }
     );
     const data = {
-      newTask: edit
+      updatedTask: edit,
     };
     dispatch(update_tasks({ data }));
 

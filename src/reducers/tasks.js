@@ -15,8 +15,12 @@ const task = (state = insitialState, action) => {
       return state;
 
     case "UPDATE":
-      const { newTask } = payload;
+      const { updatedTask } = payload;
       return state;
+
+    case "NEW":
+      const { newTask } = payload;
+      return { newTask };
 
     default:
       return state;
@@ -46,5 +50,13 @@ export const update_tasks = (data) => {
   return {
     type: "UPDATE",
     payload: "",
+  };
+};
+
+export const new_tasks = (data) => {
+  // console.log("data",data.data);
+  return {
+    type: "NEW",
+    payload: data.data,
   };
 };
