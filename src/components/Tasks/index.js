@@ -5,6 +5,8 @@ import "./style.css";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { get_tasks } from "../../reducers/tasks";
+import { delete_tasks } from "../../reducers/tasks";
+
 const Tasks = () => {
   const state = useSelector((state) => {
     return {
@@ -56,8 +58,17 @@ const Tasks = () => {
         headers: { Authorization: `Bearer ${state.signIn.token}` },
       }
     );
+
+    //
+
     getTasks();
     getTasksAdmin();
+
+    const data = {
+      del: "",
+    };
+
+    dispatch(delete_tasks({ data }));
   };
 
   const getTasksAdmin = async () => {
@@ -112,7 +123,7 @@ const Tasks = () => {
   const logout = () => {
     localStorage.clear();
   };
-  console.log("state.task.taskss", state.task.tasks);
+  // console.log("state.task.taskss", state.task.tasks);
   return (
     <div className="container">
       <form onSubmit={(e) => newTask(e)}>

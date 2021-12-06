@@ -10,6 +10,10 @@ const task = (state = insitialState, action) => {
       const { tasks } = payload;
       return { tasks };
 
+      case "DELETE":
+        const { del } = payload;
+        return state
+
     default:
       return state;
   }
@@ -24,4 +28,13 @@ export const get_tasks = (data) => {
     payload: data.data,
   };
 };
+
+export const delete_tasks = (data) => {
+  // console.log("data",data.data);
+  return {
+    type: "DELETE",
+    payload: "",
+  };
+};
+
 
