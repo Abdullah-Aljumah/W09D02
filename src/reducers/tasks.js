@@ -10,6 +10,10 @@ const task = (state = insitialState, action) => {
       const { tasks } = payload;
       return { tasks };
 
+      case "GETADMIN":
+      const { taskss } = payload;
+      return { taskss };
+
     case "DELETE":
       const { del } = payload;
       return state;
@@ -20,7 +24,7 @@ const task = (state = insitialState, action) => {
 
     case "NEW":
       const { newTask } = payload;
-      return { newTask };
+      return state;
 
     default:
       return state;
@@ -60,3 +64,13 @@ export const new_tasks = (data) => {
     payload: data.data,
   };
 };
+
+
+export const get_tasks_admin = (data) => {
+  console.log("data", data.data);
+  return {
+    type: "GETADMIN",
+    payload: data.data,
+  };
+};
+

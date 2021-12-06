@@ -8,12 +8,14 @@ import { get_tasks } from "../../reducers/tasks";
 import { delete_tasks } from "../../reducers/tasks";
 import { update_tasks } from "../../reducers/tasks";
 import { new_tasks } from "../../reducers/tasks";
+import { get_tasks_admin } from "../../reducers/tasks";
 
 const Tasks = () => {
   const state = useSelector((state) => {
     return {
       signIn: state.signIn,
       task: state.task,
+      taskss: state.taskss,
     };
   });
 
@@ -61,8 +63,6 @@ const Tasks = () => {
       }
     );
 
-    //
-
     getTasks();
     getTasksAdmin();
 
@@ -78,7 +78,14 @@ const Tasks = () => {
     let res = await axios.get(`${process.env.REACT_APP_BASE_URL}/tasks`, {
       headers: { Authorization: `Bearer ${state.signIn.token}` },
     });
-    console.log("adminTask", res);
+
+    const data = {
+      tasks: res.data.map((item) => {
+        return item;
+      }),
+    };
+    dispatch(get_tasks({ data }));
+
     setTasks(res.data);
   };
 
